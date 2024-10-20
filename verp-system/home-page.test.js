@@ -5,7 +5,8 @@ fixture`Open the Home-Page successfylly`
     //.before(async t =>{test setup goes here, axait runDatabaseReset(), await seedTestData()})
     .beforeEach(async t => {
         //run befor each test 
-        await t.setTestSpeed(0.8)
+        await t
+        .setTestSpeed(0.8)
     })
     //.after(async t =>{ cleaning test data, Logging and sending data tp monitoring systems})
     //.afterEach(async t => { runs after each test    })
@@ -36,9 +37,9 @@ fixture`Open the Home-Page successfylly`
             .click(rememberCheck)
             .click(loginButton)
             .expect(incorrectusername.innerText).contains('User Name Not Exist')
-        })        
-    test('LogIn successfully', async t=>{
-//      const companypageload = Selector ('.nologin-bg')
+        })
+///////////defina a Role to skip login in each test////////////
+    const adminRole = Role('http://localhost:58307/Dictionaries/Account/Login', async t => {
         await t
         .click(username)
         .typeText(username, 'admin')
@@ -47,69 +48,66 @@ fixture`Open the Home-Page successfylly`
         .click(showpassbutton)
         .click(rememberCheck)
         .click(loginButton)
-//      .expect(companypageload.exists).ok()
-        .navigateTo('http://localhost:58307/Home/CompanySelection')
-      
+        //.navigateTo('http://localhost:58307/Home/CompanySelection')
         const selectcompany = Selector ('.list-group-item.Company.noselect[data-id="1"]')
         await t
         .skipJsErrors()
         .click(selectcompany)
-        .navigateTo('http://localhost:58307/')
         .skipJsErrors(false) 
-    })    
+    }, { preserveUrl: true })
 
+test('LogIn successfully', async t => {
+    await t.useRole(adminRole)
+    // After successful login and company selection, perform further navigation or assertions
+    await t.navigateTo('http://localhost:58307/')
+})
 
 //Fixture for interacting with other dashboards
 fixture`Open cards successfully`
     .page`http://localhost:58307/`
     .skipJsErrors()  // Globally ignoring JS errors
-    .afterEach(async t => {
+    .beforeEach(async t=> {
         await t
-        .navigateTo('http://localhost:58307/')
-    });
+        .useRole(adminRole)
+    })
+    .afterEach(async t=> {
+        const homeLink = Selector('#NavigationPaths').find('a').withText('Home')
+        await t.click(homeLink)
+    })
     test('POS', async t => {
+        const POS = Selector('.ag-courses_item[title="Start Building The Point Of Sales"]').find(' > a:nth(0)')
         await t
+        .click(POS)
         .navigateTo('http://localhost:58307/Inventory/Dictionary/PointOfSales?action=AddNew')
-    });
+    })
     test('Financial', async t => {
-        await t
-        .navigateTo('http://localhost:58307/Accounting/Accountancy/FinancialDashboardsView')
-    });
+        await t.navigateTo('http://localhost:58307/Accounting/Accountancy/FinancialDashboardsView')
+    })
     test('HR', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/HRMS/Dictionary/HumanResourcesManagementDashboardsView')
-    });
+        await t.navigateTo('http://localhost:58307/HRMS/Dictionary/HumanResourcesManagementDashboardsView')
+    })
     test('BI Dashboards', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/DSS/Dictionary/DashboardsAndReportsView')
-    });
+        await t.navigateTo('http://localhost:58307/DSS/Dictionary/DashboardsAndReportsView')
+    })
    /* test('Time Management Dashboards View', async t => {
-    const TMS = Selector('#CenterMenu_DXI3_T').find(':containsExcludeChildren(Time Management)')
-    await t
-    .navigateTo('http://localhost:58307/Attendance/Home/TimeManagementDashboardsView')
-    }); */
+    await t.navigateTo('http://localhost:58307/Attendance/Home/TimeManagementDashboardsView')
+    }) */
    test('Inventory', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/Inventory/Home/InventoryDashboardView')
-    });
+        await t.navigateTo('http://localhost:58307/Inventory/Home/InventoryDashboardView')
+    })
     test('Work Flow', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/WorkFlow/Dictionary/WorkFlowDiagrams')
-    });
+        await t.navigateTo('http://localhost:58307/WorkFlow/Dictionary/WorkFlowDiagrams')
+    })
     test('Configurations', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/Dictionaries/Settings/Settings')
-    });
+        await t.navigateTo('http://localhost:58307/Dictionaries/Settings/Settings')
+    })
     test('Sales', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/Inventory/Home/SalesDashboardView')
-    });
+        await t.navigateTo('http://localhost:58307/Inventory/Home/SalesDashboardView')
+    })
     test('Purchasing', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/Inventory/Home/PurchaseDashboardView')
-    });
+        await t.navigateTo('http://localhost:58307/Inventory/Home/PurchaseDashboardView')
+    })
     test('Approval', async t =>{
-        await t
-        .navigateTo('http://localhost:58307/HRMS/Approval/Approval')
-    });
+        await t.navigateTo('http://localhost:58307/HRMS/Approval/Approval')
+    })
 
