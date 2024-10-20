@@ -1,0 +1,14 @@
+{
+  "name": "verp-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test:chrome": "testcafe chrome ./verp-system"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "testcafe": "^3.6.2"
+  }
+}
