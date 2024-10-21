@@ -8,8 +8,14 @@ import { adminRole } from "./roles.test"  // Import the admin role from roles.te
     const loginButton = Selector('#Button_CD')
     const enterpassword = Selector('#Password_I')  
 
-export const logInCases = () => {
-        test('incorrect password', async t =>{
+export const logIn_Test_Cases = () => {
+
+    fixture`Login page test cases`
+    .page`http://localhost:58307/Dictionaries/Account/Login`
+    .beforeEach(async t => {
+        await t.setTestSpeed(0.8)
+    })
+    test('incorrect password', async t =>{
             const incorrectpass= Selector('#Password_EC')
             await t
             .typeText(username, 'admin')
