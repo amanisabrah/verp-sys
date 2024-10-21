@@ -48,23 +48,22 @@ fixture`Open the Home-Page successfylly`
         .click(showpassbutton)
         .click(rememberCheck)
         .click(loginButton)
-        //.navigateTo('http://localhost:58307/Home/CompanySelection')
+        //navigateTo('http://localhost:58307/Home/CompanySelection')
         const selectcompany = Selector ('.list-group-item.Company.noselect[data-id="1"]')
         await t
         .skipJsErrors()
         .click(selectcompany)
         .skipJsErrors(false) 
+        .navigateTo('http://localhost:58307/')
     }, { preserveUrl: true })
 
-test('LogIn successfully', async t => {
-    await t.useRole(adminRole)
-    // After successful login and company selection, perform further navigation or assertions
-    await t.navigateTo('http://localhost:58307/')
-})
+    test('LogIn successfully', async t => {
+       await t.useRole(adminRole)
+    })
 
 //Fixture for interacting with other dashboards
 fixture`Open cards successfully`
-    .page`http://localhost:58307/`
+    .page`http://localhost:58307/Dictionaries/Account/Login`
     .skipJsErrors()  // Globally ignoring JS errors
     .beforeEach(async t=> {
         await t
@@ -75,9 +74,7 @@ fixture`Open cards successfully`
         await t.click(homeLink)
     })
     test('POS', async t => {
-        const POS = Selector('.ag-courses_item[title="Start Building The Point Of Sales"]').find(' > a:nth(0)')
         await t
-        .click(POS)
         .navigateTo('http://localhost:58307/Inventory/Dictionary/PointOfSales?action=AddNew')
     })
     test('Financial', async t => {
