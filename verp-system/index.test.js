@@ -1,45 +1,15 @@
 import { Selector } from "testcafe"
-import { adminRole } from "./roles"  // Import the admin role from roles.js
+import { adminRole } from "./roles.test"  // Import the admin role from roles.test.js
+import { logInCases } from "./login.test"
 
-    const username= Selector ("#Login_I")
-    const passwordInput = Selector('#Password_I_CLND')
-    const showpassbutton = Selector('#Password_B0')
-    const rememberCheck = Selector('#RememberMe_S_D')
-    const loginButton = Selector('#Button_CD')
-    const enterpassword = Selector('#Password_I')  
 
-fixture`Open the Home-Page successfylly`
+fixture`Login page test cases`
     .page`http://localhost:58307/Dictionaries/Account/Login`
     .beforeEach(async t => {
         await t.setTestSpeed(0.8)
     })
-    test('incorrect password', async t =>{
-            const incorrectpass= Selector('#Password_EC')
-            await t
-            .typeText(username, 'admin')
-            .click(passwordInput)
-            .typeText(enterpassword, '123456')
-            .click(showpassbutton)
-            .click(rememberCheck)
-            .click(loginButton)
-            .expect(incorrectpass.innerText).contains('Incorrect Password')
-        })   
-    test('incorrect username', async t=> {
-            const incorrectusername= Selector('#Login_EC')
-            await t
-            .typeText(username, 'Waleed')
-            .click(passwordInput)
-            .typeText(enterpassword, 'Qwe!23-2016')
-            .click(showpassbutton)
-            .click(rememberCheck)
-            .click(loginButton)
-            .expect(incorrectusername.innerText).contains('User Name Not Exist')
-        })        
-    test('LogIn successfully', async t => {
-        await t.useRole(adminRole)
-     })
- 
-
+    logInCases()
+   
 //Fixture for interacting with other dashboards
 fixture`Open cards successfully`
     .page`http://localhost:58307/Dictionaries/Account/Login`
@@ -49,7 +19,9 @@ fixture`Open cards successfully`
     })
     .afterEach(async t=> {
         const homeLink = Selector('#NavigationPaths').find('a').withText('Home')
-        await t.click(homeLink)
+        await t
+        .setTestSpeed(0.9)
+        .click(homeLink)
     })
     const dashboardTests =[
         {name: 'POS', URL:'http://localhost:58307/Inventory/Dictionary/PointOfSales?action=AddNew'},
