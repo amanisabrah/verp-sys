@@ -1,5 +1,5 @@
 import { Selector } from "testcafe"
-import { adminRole } from "./roles.test"  // Import the admin role from roles.test.js
+import { adminRole } from "../roles.test"  // Import the admin role from roles.test.js
 
 export const homePage_Test_Cases = () =>{
 
