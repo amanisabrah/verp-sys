@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:chrome": "testcafe chrome ./verp-system"
+    "test:chrome": "testcafe chrome ./verp-system",
+    "test:edge": "testcafe edge ./verp-system"
   },
   "author": "",
   "license": "ISC",

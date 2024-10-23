@@ -1,3 +1,5 @@
+//This folder is for tests that apply across all modules or the system as a whole
+
 import { Selector } from "testcafe"
 import { adminRole } from "../roles.test"  // Import the admin role from roles.test.js
 
