@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "chrome-remote-interface": "^0.33.2",
     "testcafe": "^3.6.2"
   }
 }
