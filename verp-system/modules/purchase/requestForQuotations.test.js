@@ -17,6 +17,8 @@ export const RFQ_Test_Cases = () => {
     .beforeEach(async t => {
         await t.useRole(adminRole)
         await open_Purchaasing_Dashboard(t)  // Reuse the helper function to open the Purchase dashboard
+        // Set a handler for native dialogs
+        await t.setNativeDialogHandler(() => true); // Automatically accept geolocation requests,It ensures that the script waits for the handler to be set before moving on to the next line of code.
     })
 
     test('Open the grid view for RFQ', async t => {
@@ -34,7 +36,7 @@ export const RFQ_Test_Cases = () => {
     test('open new edit form immediately', async t =>{
         await t
         .hover(navigatebar)
-        .click(newform).find('[title="New"].menu-button')//should open new edit form for the RFQ
+        .click(newform.find('[title="New"].menu-button'))//should open new edit form for the RFQ
 
     })
 
