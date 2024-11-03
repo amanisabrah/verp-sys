@@ -5,9 +5,8 @@ import { adminRole } from "../../roles.test"  // Import the admin role from role
 import { open_Purchaasing_Dashboard } from "../../helpers.test"
 
 export const RFQ_Test_Cases = () => {
-    const pageTitle = Selector('#PageTitle');
-    const datesFilterForm = Selector('#DatesFilterForm_0_2');
-    const gridViewHeader = Selector('#RequestForQuotationGridView_DXHeadersRow0');
+    const pageTitle = Selector('#PageTitle')
+    const datesFilterForm = Selector('#DatesFilterForm_0_2')
     
     fixture`RFQ Test Cases`
     .page`http://localhost:58307/Dictionaries/Account/Login`
@@ -25,8 +24,6 @@ export const RFQ_Test_Cases = () => {
         .click('#CenterMenu_DXI3i0_T')
         .expect(pageTitle.innerText).contains('Request For Quotations')
         .expect(datesFilterForm.visible).ok('Dates Filter Form should be visible')// if the test is stopped should display the message ('Dates Filter Form should be visible')
-
-
     })
 
 
