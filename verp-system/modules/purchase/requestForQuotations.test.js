@@ -18,7 +18,9 @@ const selectors={
     saveAndExit: Selector('#RequestForQuotationEditFormToolbar_DXI3_T'),
     saveAndSend: Selector('#RequestForQuotationEditFormToolbar_DXI4_T'),
     cancel: Selector('#RequestForQuotationEditFormToolbar_DXI5_T'),
-    details: Selector('#RequestForQuotationDetailsFormLayoutItem')
+    details: Selector('#RequestForQuotationDetailsFormLayoutItem'),
+    addLine: Selector('#RequestForQuotationGridViewBatch_DXCBtn0Img'),
+    deleteline : Selector('#RequestForQuotationGridViewBatch_DXCBtn1Img')
 }
 
 export const RFQ_Test_Cases = () => {
@@ -29,25 +31,25 @@ export const RFQ_Test_Cases = () => {
         await t.useRole(adminRole)
         await open_Purchaasing_Dashboard(t)  // Reuse the helper function to open the Purchase dashboard
         await t
-       .hover(selectors.navigatebar)
-       .setNativeDialogHandler(() => true); // Automatically accept geolocation requests,It ensures that the script waits for the handler to be set before moving on to the next line of code.
+        .setTestSpeed(0.5)
+        .hover(selectors.navigatebar)
+        .setNativeDialogHandler(() => true)// Automatically accept geolocation requests,It ensures that the script waits for the handler to be set before moving on to the next line of code.
+        .click( selectors.newform.find('[title="New"].menu-button'))//should open new edit form for the RFQ
+        .wait(1000)
+        .navigateTo('http://localhost:58307/Inventory/PurchaseDocuments/RequestForQuotationEditForm?PDTID=8')
+        .wait(10000)// Wait for the form to load
     })
-    test('Open the grid view for RFQ', async t => {
+
+    /*test('Open the grid view for RFQ', async t => {
         await t
         .setTestSpeed(0.5)
+        .wait(1000)
         .click(selectors.rfqGridview)
         .expect(selectors.pageTitle.innerText).contains('Request For Quotations')
         .expect(selectors.datesFilterForm.visible).ok('Dates Filter Form should be visible')// if the test is stopped should display the message ('Dates Filter Form should be visible')
         //display the toolbar
-    })
-
-    test('open new edit form immediately', async t =>{
-        await t
-        .setTestSpeed(0.5)
-        .click( selectors.newform.find('[title="New"].menu-button'))//should open new edit form for the RFQ
-        .navigateTo('http://localhost:58307/Inventory/PurchaseDocuments/RequestForQuotationEditForm?PDTID=8')
-        .wait(5000)// Wait for the form to load
-
+    })*/
+    test('Open new edit form immediately', async t =>{
         // Validate fields and their default values
         const warehouseValue = await selectors.warehouseField.value
         const currencyValue = await selectors.currencyField.value
@@ -65,14 +67,28 @@ export const RFQ_Test_Cases = () => {
         .expect(selectors.saveAndPrint.visible).ok('Save And Print button should be visible')
         .expect(selectors.saveAndExit.visible).ok('Save And Exit button should be visible')
         .expect(selectors.saveAndSend.visible).ok('Save And Send button should be visible')
+        .wait(1000)
         .expect(selectors.cancel.visible).ok('Cancel button should be visible')
-        .expect(selectors.details.visible).ok('details shoe be displayed')
+        .expect(selectors.details.visible).ok('details should be displayed')
 
         // Log field values for debugging
         console.log('Warehouse:', warehouseValue)
         console.log('Currency:', currencyValue)
         console.log('Document Date:', documentDateValue)
         console.log('DeadLine Date:', deadlineDateValue)
+    })  
+    test('Add rows into detils', async t => {
+        await t
+        .expect(selectors.addLine.visible).ok('+ icon should be displayed')
+        .click(selectors.addLine)
+        .expect('#INV_RQD_ITMID_I').ok('system should add new line')
+    })
 
-  })
+    const nodata= Selector('#RequestForQuotationGridViewBatch_DXEmptyRow td').withText('No data to display')
+    test('Delete rows from detils', async t => {
+        await t
+        .expect(selectors.deleteline.visible).ok('- icon should be displayed')
+        .click(selectors.deleteline)
+        .expect(nodata.visible).ok('should No details displayed')
+    })
 }

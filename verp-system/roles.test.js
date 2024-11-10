@@ -10,6 +10,8 @@ export const adminRole = Role('http://localhost:58307/Dictionaries/Account/Login
     const rememberCheck = Selector('#RememberMe_S_D')
     const loginButton = Selector('#Button_CD')
     const enterpassword = Selector('#Password_I')  
+    const selectcompany = Selector ('.list-group-item.Company.noselect[data-id="1"]')
+
     
     await t
     .click(username)
@@ -19,11 +21,11 @@ export const adminRole = Role('http://localhost:58307/Dictionaries/Account/Login
     .click(showpassbutton)
     .click(rememberCheck)
     .click(loginButton)
+    .wait(1000)
     //navigateTo('http://localhost:58307/Home/CompanySelection')
-    const selectcompany = Selector ('.list-group-item.Company.noselect[data-id="1"]')
     await t
     .skipJsErrors()
     .click(selectcompany)
-    .skipJsErrors(false) 
     .navigateTo('http://localhost:58307/')
+    .skipJsErrors(false) 
 }, { preserveUrl: true })
