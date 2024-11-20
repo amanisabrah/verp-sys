@@ -5,7 +5,9 @@
   "scripts": {
     "test:chrome": "testcafe chrome ./verp-system",
     "test:edge": "testcafe edge ./verp-system",
-    "test:edge-debug": "testcafe edge ./verp-system --debug-on-fail"
+    "test:edge-debug": "testcafe edge ./verp-system --debug-on-fail",
+    "test:chrome-debug": "testcafe chrome ./verp-system --debug-on-fail"
+
   },
   "author": "",
   "license": "ISC",
