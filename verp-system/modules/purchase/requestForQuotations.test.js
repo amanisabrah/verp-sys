@@ -49,7 +49,7 @@ export const RFQ_Test_Cases = () => {
         .expect(selectors.datesFilterForm.visible).ok('Dates Filter Form should be visible')// if the test is stopped should display the message ('Dates Filter Form should be visible')
         //display the toolbar
     })*/
-    test('Open new edit form immediately', async t =>{
+    test('1.Open new edit form immediately', async t =>{
         // Validate fields and their default values
         const warehouseValue = await selectors.warehouseField.value
         const currencyValue = await selectors.currencyField.value
@@ -77,7 +77,7 @@ export const RFQ_Test_Cases = () => {
         console.log('Document Date:', documentDateValue)
         console.log('DeadLine Date:', deadlineDateValue)
     })  
-    test('Add rows into detils', async t => {
+    test('2.Add rows into detils', async t => {
         await t
         .expect(selectors.addLine.visible).ok('+ icon should be displayed')
         .click(selectors.addLine)
@@ -85,7 +85,7 @@ export const RFQ_Test_Cases = () => {
     })
 
     const nodata= Selector('#RequestForQuotationGridViewBatch_DXEmptyRow td').withText('No data to display')
-    test('Delete rows from detils', async t => {
+    test('3.Delete rows from detils', async t => {
         await t
         .expect(selectors.deleteline.visible).ok('- icon should be displayed')
         .click(selectors.deleteline)
