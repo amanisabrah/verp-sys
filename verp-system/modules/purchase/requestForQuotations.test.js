@@ -1,6 +1,6 @@
-import { Selector } from "testcafe"
-import { adminRole } from "../../roles.test"  // Import the admin role from roles.test.js
-import { open_Purchaasing_Dashboard, getDate } from "../../helpers.test"
+import { Selector } from 'testcafe';
+import { admin_Role } from '../../roles.test'  // Import the admin role from roles.test.js
+import { open_Purchaasing_Dashboard, get_Formatted_Date } from '../../common/helpers.test.js'
 
 const general_Selectors={
     page_Title: Selector('#PageTitle'),
@@ -33,7 +33,7 @@ export const RFQ_Test_Cases = () => {
     .page`http://localhost:58307/Dictionaries/Account/Login`
     .skipJsErrors()
     .beforeEach(async t => {
-        await t.useRole(adminRole)
+        await t.useRole(admin_Role)
         await open_Purchaasing_Dashboard(t)  // Reuse the helper function to open the Purchase dashboard
         await t
             .setTestSpeed(0.5)
@@ -53,7 +53,7 @@ export const RFQ_Test_Cases = () => {
             .expect(general_Selectors.dates_Filter_Form.visible).ok('Dates Filter Form should be visible')// if the test is stopped should display the message ('Dates Filter Form should be visible')
             //display the toolbar
         })*/
-        /*test('1.Open new edit form immediately', async t =>{
+        test('1.Open new edit form immediately', async t =>{
             // Validate fields and their default values
             const warehouse_Value = await edit_form_Selctors.warehouse_Field.value
             const currency_Value = await edit_form_Selctors.currency_Field.value
@@ -62,8 +62,8 @@ export const RFQ_Test_Cases = () => {
             await t
                 .expect(warehouse_Value).notEql('', 'Warehouse should contain defult value')
                 .expect(currency_Value).notEql('', 'Currency should cotains the selected curruncy in the system')
-                .expect(document_Date_Value).eql(getDate(), 'Document Date should contain today\'s date')
-                .expect(deadline_Date_Value).eql(getDate(), 'Deadline should contain today\'s date')
+                .expect(document_Date_Value).eql(get_Formatted_Date(), 'Document Date should contain today\'s date')
+                .expect(deadline_Date_Value).eql(get_Formatted_Date(), 'Deadline should contain today\'s date')
                  // Check visibility of action buttons
                 .expect(edit_form_Selctors.save_Button.visible).ok('Save button should be visible')
                 .expect(edit_form_Selctors.save_And_New.visible).ok('Save And New button should be visible')
@@ -79,8 +79,8 @@ export const RFQ_Test_Cases = () => {
             console.log('Currency:', currency_Value)
             console.log('Document Date:', document_Date_Value)
             console.log('DeadLine Date:', deadline_Date_Value)
-        })  */
-        /*test('2.Add rows into detils', async t => {
+        })
+        test('2.Add rows into detils', async t => {
             await t
                 .expect(edit_form_Selctors.add_Line.visible).ok('+ icon should be displayed')
                 .click(edit_form_Selctors.add_Line)
@@ -91,7 +91,7 @@ export const RFQ_Test_Cases = () => {
                 .click(edit_form_Selctors.delete_line)
                 .expect(edit_form_Selctors.confirmation_Popup.visible).ok('should display confirmation popup')
                 .click(edit_form_Selctors.confirm_Delete) 
-        })*/
+        })
         const contractor_Selectors={
             add_Contractor: Selector('#INV_RFQ_Contractors_B0Img'),
             panel_Control: Selector('#PanelControl'),
