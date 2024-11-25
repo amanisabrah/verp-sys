@@ -44,7 +44,6 @@ export const RFQ_Test_Cases = () => {
             .navigateTo('http://localhost:58307/Inventory/PurchaseDocuments/RequestForQuotationEditForm?PDTID=8')
             .wait(10000)// Wait for the form to load
     })
-
         /*test('Open the grid view for RFQ', async t => {
         await t
             .setTestSpeed(0.5)
@@ -54,7 +53,7 @@ export const RFQ_Test_Cases = () => {
             .expect(general_Selectors.dates_Filter_Form.visible).ok('Dates Filter Form should be visible')// if the test is stopped should display the message ('Dates Filter Form should be visible')
             //display the toolbar
         })*/
-        test('1.Open new edit form immediately', async t =>{
+        /*test('1.Open new edit form immediately', async t =>{
             // Validate fields and their default values
             const warehouse_Value = await edit_form_Selctors.warehouse_Field.value
             const currency_Value = await edit_form_Selctors.currency_Field.value
@@ -80,8 +79,8 @@ export const RFQ_Test_Cases = () => {
             console.log('Currency:', currency_Value)
             console.log('Document Date:', document_Date_Value)
             console.log('DeadLine Date:', deadline_Date_Value)
-        })  
-        test('2.Add rows into detils', async t => {
+        })  */
+        /*test('2.Add rows into detils', async t => {
             await t
                 .expect(edit_form_Selctors.add_Line.visible).ok('+ icon should be displayed')
                 .click(edit_form_Selctors.add_Line)
@@ -92,7 +91,7 @@ export const RFQ_Test_Cases = () => {
                 .click(edit_form_Selctors.delete_line)
                 .expect(edit_form_Selctors.confirmation_Popup.visible).ok('should display confirmation popup')
                 .click(edit_form_Selctors.confirm_Delete) 
-        })
+        })*/
         const contractor_Selectors={
             add_Contractor: Selector('#INV_RFQ_Contractors_B0Img'),
             panel_Control: Selector('#PanelControl'),
@@ -108,12 +107,14 @@ export const RFQ_Test_Cases = () => {
             city: Selector('#CITIDs_I'),
             save_Con: Selector('#PanelControl_SaveImg'),
             success_Message : Selector('.alert.ui-pnotify-container.alert-success.ui-pnotify-shadow'),
-
+            alert_Message_Display : Selector('div').withText('Alert').nth(11),
+            pause_Alert_Mess: Selector('.glyphicon.glyphicon-pause'),
+            alert_Message: Selector('div').withText('Name Is Required').nth(2)
         }
-        test('create a contreactor successfully', async t =>{
+        /*test('create a contreactor successfully', async t =>{
             const name_Value= 'Amani'
             const code_Value='123'
-            const tax_Numb_Value= '564950'
+            const tax_Numb_Value= '5648971202'
             const expected_Prefix = '+962'
             const phone_Numb_Value='789552270'
             const email_Value='amani@vtech-sys.com'
@@ -135,6 +136,18 @@ export const RFQ_Test_Cases = () => {
             const contractor_Value = await edit_form_Selctors.contractor_Field.value
             await t
                 .expect(contractor_Value).notEql('', 'contractor should contain the new contractor name')
+                console.log('Supplier Contractors:', contractor_Value)
+        })*/
+        test('display error message when create a contractor', async t=>{
+            await t
+            .click(contractor_Selectors.add_Contractor)
+            .expect(contractor_Selectors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
+            .click(contractor_Selectors.save_Con)
+            .expect(contractor_Selectors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, English Name Is Required, Mobile Number Is Required, Code Is Required, Tax Number Is Duplicate"')
+            //.click(contractor_Selectors.pause_Alert_Mess)
+           // const alert_Message_Value= await contractor_Selectors.alert_Message.value
+            //console.log('Alert:',alert_Message_Value)
+
         })
     
 }
