@@ -1,6 +1,6 @@
 import { Selector } from 'testcafe'
 import { admin_Role } from '../roles.test' // Import the admin role from roles.test.js
-import { logIN_Selectors } from './helpers.test';
+import { logIN_Selectors } from './selectors';
 
 
 export const logIn_Test_Cases = () => {

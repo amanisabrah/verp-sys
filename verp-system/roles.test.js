@@ -1,6 +1,6 @@
 import { Role, Selector } from 'testcafe';
 ///////////defina a Role to skip login in each test/export:to make functions, variables, or constants available to other files or modules.
-import { logIN_Selectors } from './common/helpers.test';
+import { logIN_Selectors } from './common/selectors';
 
 export const admin_Role = Role('http://localhost:58307/Dictionaries/Account/Login', async t => {
     await t    
