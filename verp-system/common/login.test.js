@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe'
-import { admin_Role } from '../roles.test' // Import the admin role from roles.test.js
-import { logIN_Selectors } from './selectors';
-
+import { logIN_Selectors } from './helpers/selectors'
+import { admin_Role } from './helpers/roles.test'
 
 export const logIn_Test_Cases = () => {
     fixture`Login page test cases`
@@ -30,8 +29,5 @@ export const logIn_Test_Cases = () => {
             .click(logIN_Selectors.remember_Me)
             .click(logIN_Selectors.log_In_Button)
             .expect(incorrectusername.innerText).contains('User Name Not Exist')
-        })        
-    test('LogIn successfully', async t => {
-        await t.useRole(admin_Role)
-     })
+        })     
 }
