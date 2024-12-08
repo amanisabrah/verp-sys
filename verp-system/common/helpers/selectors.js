@@ -4,15 +4,14 @@ export const logIN_Selectors = {
     user_Name: Selector('#Login_I'),
     password: Selector('#Password_I_CLND'),
     enter_Password: Selector('#Password_I'),
-    show_Pass_Button: Selector('#Password_B0'),
-    remember_Me: Selector('#RememberMe_S_D'),
+    //show_Pass_Button: Selector('#Password_B0'),
+    //remember_Me: Selector('#RememberMe_S_D'),
     log_In_Button: Selector('#Button_CD'),
     select_Company: Selector('.list-group-item.Company.noselect[data-id="1"]'),
   }
-
 export const home_Page_Selectors={
     home_Page: Selector('#NavigationPaths a').withText('Home'),
-    purchase_dashboard: Selector('.ag-courses_item[title="Purchasing"]').find(' > a:nth(0)')
+    purchase_dashboard: Selector('#ContentBody a').withText('Purchasing')
 }
 export const general_Edit_Form_Selectors={
     purchase_Navigate_Bar: Selector('#CenterMenu_DXI3_T'),
@@ -32,17 +31,24 @@ export const edit_form_Selctors={
     save_And_Exit: Selector('#RequestForQuotationEditFormToolbar_DXI3_T'),
     save_And_Send: Selector('#RequestForQuotationEditFormToolbar_DXI4_T'),
     cancel: Selector('#RequestForQuotationEditFormToolbar_DXI5_T'),
+    ribbon_Status: Selector('#ContentBody').find('.ribbon.dxpnlControl_AccMaterialCompact'),
     details: Selector('#RequestForQuotationDetailsFormLayoutItem'),
     add_Line: Selector('#RequestForQuotationGridViewBatch_DXCBtn0Img'),
     delete_line : Selector('#RequestForQuotationGridViewBatch_DXCBtn-2Img'),
     confirmation_Popup: Selector('#CustomAlertPopup_PWH-1'),
     confirm_Delete: Selector('#CustomAlertPopup_YES_CD'),
-    contractor_Field: Selector('#INV_RFQ_Contractors_I')
+    contractor_Field: Selector('#INV_RFQ_Contractors_I'),
+    item_Index0: Selector('#RequestForQuotationGridViewBatch_DXDataRow0').find('.dxgv.dx-ellipsis.dx-al').nth(0),
+    create_Item_Image: Selector('#INV_RQD_ITMID_B0'),
+    create_Item: Selector('INV_RQD_ITMID_B0Img'),
+    panel_Control: Selector('#PanelControl'),
+    save_Panel_Button: Selector('#PanelControl_Save_CD'),
+    success_Message : Selector('.alert.ui-pnotify-container.alert-success.ui-pnotify-shadow'),
+
 }
 
 export const contractor_Selectors={
     add_Contractor: Selector('#INV_RFQ_Contractors_B0Img'),
-    panel_Control: Selector('#PanelControl'),
     con_Name : Selector('#ACC_CON_Name_I'),
     con_Name2 : Selector('#ACC_CON_Name2_I'),
     code :Selector ('#ACC_CON_Code_I'),
@@ -53,9 +59,15 @@ export const contractor_Selectors={
     business_Type: Selector('#ACC_CON_CBTID_I'),
     clicnet_Category: Selector('#ACC_CON_GCCID_I'),
     city: Selector('#CITIDs_I'),
-    save_Con: Selector('#PanelControl_SaveImg'),
-    success_Message : Selector('.alert.ui-pnotify-container.alert-success.ui-pnotify-shadow'),
     alert_Message_Display : Selector('div').withText('Alert').nth(11),
     pause_Alert_Mess: Selector('.glyphicon.glyphicon-pause'),
     alert_Message: Selector('div').withText('Name Is Required').nth(2)
+}
+export const item_Selectors={
+    item_Name: Selector('#INV_ITM_Name_I'),
+    item_Name2:Selector('#INV_ITM_Name2_I'),
+    item_Sale_Name: Selector('#INV_ITM_SalesName_I'),
+    item_Sale_Name2: Selector('#INV_ITM_SalesName2_I'),
+    item_Symbol: Selector('#INV_ITM_Symbol_I'),
+
 }

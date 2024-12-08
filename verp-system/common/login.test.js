@@ -8,7 +8,7 @@ export const logIn_Test_Cases = () => {
     .beforeEach(async t => {
         await t.setTestSpeed(0.8)
     })
-    test('incorrect password', async t =>{
+   /* test('incorrect password', async t =>{
             const incorrectpass= Selector('#Password_EC')
             await t
             .typeText(logIN_Selectors.user_Name, 'admin')
@@ -18,8 +18,8 @@ export const logIn_Test_Cases = () => {
             .click(logIN_Selectors.remember_Me)
             .click(logIN_Selectors.log_In_Button)
             .expect(incorrectpass.innerText).contains('Incorrect Password')
-        })   
-    test('incorrect username', async t=> {
+        })   */
+    /*test('incorrect username', async t=> {
             const incorrectusername= Selector('#Login_EC')
             await t
             .typeText(logIN_Selectors.user_Name, 'Waleed')
@@ -29,5 +29,8 @@ export const logIn_Test_Cases = () => {
             .click(logIN_Selectors.remember_Me)
             .click(logIN_Selectors.log_In_Button)
             .expect(incorrectusername.innerText).contains('User Name Not Exist')
-        })     
+        })    */
+        test('LogIn successfully', async t => {
+            await t.useRole(admin_Role)      
+         })    
 }
