@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 import { admin_Role } from '../../common/helpers/roles.test.js';
 import { open_Purchaasing_Dashboard, open_RFQ_EditForm , get_Formatted_Date } from '../../common/helpers/utils.test.js';
-import { edit_form_Selctors, contractor_Selectors, item_Selectors } from '../../common/helpers/selectors.js';
+import { edit_form_Selctors, contractor_Selectors, item_Selectors, panel_Control_Selctors } from '../../common/helpers/selectors.js';
 
 export const RFQ_Edit_Form_Test_Cases = () => {
     fixture`RFQ Edit Form Test Cases`
@@ -62,20 +62,20 @@ export const RFQ_Edit_Form_Test_Cases = () => {
             const email_Value = `${cont_Name_Value}@example.com`.toLowerCase(); // Random email using contractor name
             await t
                 .click(contractor_Selectors.add_Contractor)
-                .expect(edit_form_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
+                .expect(panel_Control_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
                 .typeText(contractor_Selectors.con_Name, cont_Name_Value)
-                .click(edit_form_Selctors.panel_Control)
+                .click(panel_Control_Selctors.panel_Control)
                 .expect(contractor_Selectors.con_Name2.value).eql(cont_Name_Value,' The English name should be filled automatically with the value of the entered name.')
                 .typeText(contractor_Selectors.code, code_Value)
                 .typeText(contractor_Selectors.tax_number,tax_Numb_Value)
                 .expect(contractor_Selectors.prefix.value).eql(expected_Prefix, 'Prefix should contain the default value')
                 .typeText(contractor_Selectors.phone_Number,phone_Numb_Value)
                 .typeText(contractor_Selectors.email,email_Value)
-                .click(edit_form_Selctors.save_Panel_Button)
+                .click(panel_Control_Selctors.save_Panel_Button)
                 .wait(1000)
-                .expect(edit_form_Selctors.success_Message.visible).ok('Should display success message')
+                .expect(panel_Control_Selctors.success_Message.visible).ok('Should display success message')
                 .wait(2000)
-            const contractor_Value = await edit_form_Selctors.contractor_Field.value
+            const contractor_Value = await contractor_Selectors.contractor_Field.value
             await t
                 .expect(contractor_Value).notEql('', 'contractor should contain the new contractor name')
             console.log('Supplier Contractors: ', contractor_Value)
@@ -83,33 +83,59 @@ export const RFQ_Edit_Form_Test_Cases = () => {
         test('4. display error message when create a contractor', async t=>{
             await t
             .click(contractor_Selectors.add_Contractor)
-            .expect(edit_form_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
-            .click(edit_form_Selctors.save_Panel_Button)
-            .expect(edit_form_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, English Name Is Required, Mobile Number Is Required, Code Is Required, Tax Number Is Duplicate')
+            .expect(panel_Control_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
+            .click(panel_Control_Selctors.save_Panel_Button)
+            .expect(panel_Control_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, English Name Is Required, Mobile Number Is Required, Code Is Required, Tax Number Is Duplicate')
         })
         test('5. create item and display it in details', async t=>{
             const item_Name_Value = `${Math.random().toString(36).substring(2, 8)}` // Generates a random string
             const expected_Symbol_Value = item_Name_Value.slice(0, 3).toUpperCase()
             await t
-                .doubleClick(edit_form_Selctors.item_Index0)
-                .click(edit_form_Selctors.create_Item_Image)
-                .expect(edit_form_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Item" option.')
+                .doubleClick(item_Selectors.item_Index0)
+                .click(item_Selectors.create_Item_Image)
+                .expect(panel_Control_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Item" option.')
                 .click(item_Selectors.item_Name)
                 .typeText(item_Selectors.item_Name, item_Name_Value)
-                .click(edit_form_Selctors.panel_Control)
+                .click(panel_Control_Selctors.panel_Control)
                 .expect(item_Selectors.item_Name2.value).eql(item_Name_Value,' The English name should be filled automatically with the value of the entered name.')
                 .expect(item_Selectors.item_Sale_Name.value).eql(item_Name_Value,' The sales name should be filled automatically with the value of the entered name.')
                 .expect(item_Selectors.item_Sale_Name2.value).eql(item_Name_Value,' The sales English name should be filled automatically with the value of the entered name.')
                 .expect(item_Selectors.item_Symbol.value).eql(expected_Symbol_Value,' The symbol should be filled with the first three letters of the entered name in uppercase.')
-                .click(edit_form_Selctors.save_Panel_Button)
-                .expect(edit_form_Selctors.success_Message.visible).ok('Should display success message')
+                .click(panel_Control_Selctors.save_Panel_Button)
+                .expect(panel_Control_Selctors.success_Message.visible).ok('Should display success message')
         })
         test('6. display error message when create an Item', async t=>{
             await t
-            .doubleClick(edit_form_Selctors.item_Index0)
-            .click(edit_form_Selctors.create_Item_Image)
-            .click(edit_form_Selctors.save_Panel_Button)
-            .expect(edit_form_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, Name ENG Is Required. Sales Name Is Required. Sales English Name Is Required. Symbol Is Required.')
+            .doubleClick(item_Selectors.item_Index0)
+            .click(item_Selectors.create_Item_Image)
+            .click(panel_Control_Selctors.save_Panel_Button)
+            .expect(panel_Control_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, Name ENG Is Required. Sales Name Is Required. Sales English Name Is Required. Symbol Is Required.')
+        })
+        test('7. create a Draft RFQ document successfully', async t =>{
+            const reference_Numb_Value = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString() // Generate a random value
+            await t
+                .skipJsErrors()
+                .click(contractor_Selectors.list_Of_Contractors)
+                .expect(contractor_Selectors.list_Visible.visible).ok('List of contractors should displayed')
+                .click(contractor_Selectors.select_Contractor)
+                .click(edit_form_Selctors.edit_Form)
+                .click(edit_form_Selctors.branch_list)
+                .expect(edit_form_Selctors.list_Visible.visible).ok('List of branches should displayed')
+                .click(edit_form_Selctors.select_Branch)
+                .click(edit_form_Selctors.edit_Form)
+                .click(edit_form_Selctors.reference_Numb)
+                .typeText(edit_form_Selctors.reference_Numb,reference_Numb_Value)
+                .doubleClick(item_Selectors.item_Index0)
+                .click(item_Selectors.item_List)
+                .expect(item_Selectors.list_Visible.visible).ok('List of items should displayed')
+                .click(item_Selectors.select_Item)
+                .wait(5000)
+                .click(edit_form_Selctors.save_Button)
+                const postReloadElement = edit_form_Selctors.edit_Form
+                await t
+                    .expect(postReloadElement.exists)
+                    .ok('Page should reload and display the expected element after saving')
+
         })
 
     
