@@ -44,6 +44,7 @@ export const edit_form_Selctors={
     panel_Control: Selector('#PanelControl'),
     save_Panel_Button: Selector('#PanelControl_Save_CD'),
     success_Message : Selector('.alert.ui-pnotify-container.alert-success.ui-pnotify-shadow'),
+    alert_Message_Display : Selector('div').withText('Alert').nth(11),
 
 }
 
@@ -59,7 +60,6 @@ export const contractor_Selectors={
     business_Type: Selector('#ACC_CON_CBTID_I'),
     clicnet_Category: Selector('#ACC_CON_GCCID_I'),
     city: Selector('#CITIDs_I'),
-    alert_Message_Display : Selector('div').withText('Alert').nth(11),
     pause_Alert_Mess: Selector('.glyphicon.glyphicon-pause'),
     alert_Message: Selector('div').withText('Name Is Required').nth(2)
 }

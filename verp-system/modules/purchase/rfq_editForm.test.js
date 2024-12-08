@@ -13,7 +13,7 @@ export const RFQ_Edit_Form_Test_Cases = () => {
         await open_RFQ_EditForm(t)
         //await t.setNativeDialogHandler(() => true) // Automatically accept geolocation requests,It ensures that the script waits for the handler to be set before moving on to the next line of code.
     })
-       test('1.Open new edit form immediately', async t =>{
+       test('1. Open new edit form immediately', async t =>{
             // Validate fields and their default values
             const warehouse_Value = await edit_form_Selctors.warehouse_Field.value
             const currency_Value = await edit_form_Selctors.currency_Field.value
@@ -41,7 +41,7 @@ export const RFQ_Edit_Form_Test_Cases = () => {
             console.log('Document Date:', document_Date_Value)
             console.log('DeadLine Date:', deadline_Date_Value)
         })
-        test('2.Add rows into detils', async t => {
+        test('2. Add rows into detils', async t => {
             await t
                 .expect(edit_form_Selctors.add_Line.visible).ok('+ icon should be displayed')
                 .click(edit_form_Selctors.add_Line)
@@ -53,14 +53,13 @@ export const RFQ_Edit_Form_Test_Cases = () => {
                 .expect(edit_form_Selctors.confirmation_Popup.visible).ok('should display confirmation popup')
                 .click(edit_form_Selctors.confirm_Delete) 
         })
-
-       /* test('create a contreactor successfully', async t =>{
-            const cont_Name_Value= 'Amani'
+        test('3. create a contreactor successfully', async t =>{
+            const cont_Name_Value = Array.from({ length: 6 }, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join('');
             const code_Value='123'
             const tax_Numb_Value = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString() // Generate a random value
             const expected_Prefix = '+962'
-            const phone_Numb_Value='789552270'
-            const email_Value='amani@vtech-sys.com'
+            const phone_Numb_Value = `7${Math.floor(100000000 + Math.random() * 900000000)}`; // Random 10-digit phone number starting with '7'
+            const email_Value = `${cont_Name_Value}@example.com`.toLowerCase(); // Random email using contractor name
             await t
                 .click(contractor_Selectors.add_Contractor)
                 .expect(edit_form_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
@@ -80,21 +79,17 @@ export const RFQ_Edit_Form_Test_Cases = () => {
             await t
                 .expect(contractor_Value).notEql('', 'contractor should contain the new contractor name')
             console.log('Supplier Contractors: ', contractor_Value)
-        })*/
-       /* test('display error message when create a contractor', async t=>{
+        })
+        test('4. display error message when create a contractor', async t=>{
             await t
             .click(contractor_Selectors.add_Contractor)
             .expect(edit_form_Selctors.panel_Control.exists).ok('The External Edit form should display the "Create Contractor" option.')
             .click(edit_form_Selctors.save_Panel_Button)
-            .expect(contractor_Selectors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, English Name Is Required, Mobile Number Is Required, Code Is Required, Tax Number Is Duplicate"')
-            //.click(contractor_Selectors.pause_Alert_Mess)
-           // const alert_Message_Value= await contractor_Selectors.alert_Message.value
-            //console.log('Alert:',alert_Message_Value)
-        })*/
-        test('create item and display it in details', async t=>{
-            const item_Name_Value = `${Math.random().toString(36).substring(2, 8)}`; // Generates a random string
-            const expected_Symbol_Value = item_Name_Value.slice(0, 3).toUpperCase();
-
+            .expect(edit_form_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, English Name Is Required, Mobile Number Is Required, Code Is Required, Tax Number Is Duplicate')
+        })
+        test('5. create item and display it in details', async t=>{
+            const item_Name_Value = `${Math.random().toString(36).substring(2, 8)}` // Generates a random string
+            const expected_Symbol_Value = item_Name_Value.slice(0, 3).toUpperCase()
             await t
                 .doubleClick(edit_form_Selctors.item_Index0)
                 .click(edit_form_Selctors.create_Item_Image)
@@ -109,5 +104,13 @@ export const RFQ_Edit_Form_Test_Cases = () => {
                 .click(edit_form_Selctors.save_Panel_Button)
                 .expect(edit_form_Selctors.success_Message.visible).ok('Should display success message')
         })
+        test('6. display error message when create an Item', async t=>{
+            await t
+            .doubleClick(edit_form_Selctors.item_Index0)
+            .click(edit_form_Selctors.create_Item_Image)
+            .click(edit_form_Selctors.save_Panel_Button)
+            .expect(edit_form_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, Name ENG Is Required. Sales Name Is Required. Sales English Name Is Required. Symbol Is Required.')
+        })
+
     
 }
