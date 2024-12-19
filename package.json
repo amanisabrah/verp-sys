@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:chrome": "testcafe chrome ./verp-system",
-    "test:edge": "testcafe edge ./verp-system",
-    "test:edge-debug": "testcafe edge ./verp-system --debug-on-fail",
+    "test:chrome:verp": "testcafe chrome ./verp-system -s takeOnFails=true --disable-page-caching",
+    "test:chrome:subscription": "testcafe chrome ./erp_subscription",
+
     "test:chrome-debug": "testcafe chrome ./verp-system --debug-on-fail"
   },
   "author": "",

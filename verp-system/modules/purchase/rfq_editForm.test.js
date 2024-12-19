@@ -20,6 +20,7 @@ export const RFQ_Edit_Form_Test_Cases = () => {
             const document_Date_Value = await edit_form_Selctors.document_Date_Field.value
             const deadline_Date_Value = await edit_form_Selctors.deadline_Field.value
             await t
+                //.takeScreenshot({fullPage: true}) //take screenshoot to whole website 
                 .expect(warehouse_Value).notEql('', 'Warehouse should contain defult value')
                 .expect(currency_Value).notEql('', 'Currency should cotains the selected curruncy in the system')
                 .expect(document_Date_Value).eql(get_Formatted_Date(), 'Document Date should contain today\'s date')
@@ -137,6 +138,13 @@ export const RFQ_Edit_Form_Test_Cases = () => {
                     .ok('Page should reload and display the expected element after saving')
 
         })
+        test('8. adding a new request without filling the required field', async t =>{
+            await t
+                .click(edit_form_Selctors.save_Button)
+                .expect(edit_form_Selctors.error_Alert.visible).ok(' Should display error List contains: Contractor Is Required, Reference Number Is Required, Item Is Required, Tax is required, Units OF Measurement Is Required.')
 
+
+
+        })
     
 }

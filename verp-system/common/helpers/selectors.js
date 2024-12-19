@@ -42,6 +42,7 @@ export const edit_form_Selctors={
     list_Visible: Selector('#INV_RFQ_BRAID_DDD_L'),
     select_Branch: Selector('#INV_RFQ_BRAID_DDD_L_LBI0T1'),
     reference_Numb: Selector('#INV_RFQ_ReferenceNumber_I'),
+    error_Alert: Selector('#ErrorsAlert'),
     
 }
 export const panel_Control_Selctors={
