@@ -88,7 +88,7 @@ export const RFQ_Edit_Form_Test_Cases = () => {
             .expect(panel_Control_Selctors.alert_Message_Display.exists).ok('Display alert messages: "Name Is Required, English Name Is Required, Mobile Number Is Required, Code Is Required, Tax Number Is Duplicate')
         })
         test('5. create item and display it in details', async t=>{
-            const item_Name_Value = `${Math.random().toString(36).substring(2, 8)}` // Generates a random string
+            const item_Name_Value = `${Math.random().toString(36).substring(2, 5)}` // Generates a random string
             const expected_Symbol_Value = item_Name_Value.slice(0, 3).toUpperCase()
             await t
                 .doubleClick(item_Selectors.item_Index0)
