@@ -5,16 +5,15 @@
   "scripts": {
     "test:chrome:verp": "testcafe chrome ./verp-system -s takeOnFails=true --disable-page-caching",
     "test:chrome:subscription": "testcafe chrome ./erp-subscription/index-subscription.js",
-
     "test:chrome-verp-debug": "testcafe chrome ./verp-system --debug-on-fail",
     "test:chrome-subscription-debug": "testcafe chrome ./erp-subscription/index-subscription.js --debug-on-fail"
-
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "chrome-remote-interface": "^0.33.2",
+    "country-codes-list": "^1.6.11",
     "testcafe": "^3.7.0"
   }
 }
