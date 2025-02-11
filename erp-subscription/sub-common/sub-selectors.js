@@ -43,8 +43,9 @@ export const Business_Info_Selectors = {
     currency: Selector('input.dx-texteditor-input[role="combobox"]').withAttribute('readonly'),
     commercial_Reg_Num: Selector('input[placeholder="Registration Number"]') ,
     mobile_Code: Selector('.dx-lookup-field'),
-    image_Container: Selector('div').withText('NO IMAGE').nth(27) ,
-    file_Input_Selector : Selector('.landing-form').child('input[name="files[]"]'),
+    image_Container: Selector('.dx-button-content').nth(3) ,
+    file_Input_Selector : Selector('input[type="file"]'),
+    image_Container_After_Upload: Selector('.dx-button-content').nth(4) ,
     next:Selector('div').withText('NEXT').nth(8),
     previous: Selector('div').withText('PREVIOUS').nth(8),
 }

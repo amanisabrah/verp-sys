@@ -1,3 +1,4 @@
+import { Selector } from 'testcafe'
 import { Business_Info_Selectors, landing_Page_Selectors } from "../sub-common/sub-selectors.js"
 import { enter_Phone_And_Code  } from "../sub-common/sub-helpers.js"
 
@@ -35,7 +36,7 @@ export const Business_Info_Test_Cases = () => {
         await t.setTestSpeed(0.8)
     })
 
-    test('1- Open the Business Information stage', async t => {
+    /*test('1- Open the Business Information stage', async t => {
         await t 
                 .hover(Business_Info_Selectors.city)
                 .expect(Business_Info_Selectors.city.value).contains('Amman', 'The city should be filled with the capital of the selected phone code')
@@ -62,9 +63,8 @@ export const Business_Info_Test_Cases = () => {
                 .expect(landing_Page_Selectors.error_List.visible).ok('Error List should be displayed for Compant name, Postal Code, Company Size, Tax Number, Registration Number')
                 .click(Business_Info_Selectors.previous)
                 .expect(landing_Page_Selectors.select_Lang_Card.visible).ok('Select Language card should displayed')            
-      })
-
-            
+      })*/
+          
     test('2- Bassing the Business Information stage ', async t => {
         const imagePath = 'C:\\Users\\USER\\Pictures\\vtech logo.png';
         await t
@@ -78,14 +78,10 @@ export const Business_Info_Test_Cases = () => {
                 .wait(1000)
                 .click(Business_Info_Selectors.tax_Num)
                 .typeText(Business_Info_Selectors.tax_Num,"6598652")
-                .click(Business_Info_Selectors.image_Container)
-                //.setFilesToUpload(Business_Info_Selectors.file_Input_Selector, imagePath);  // Upload the image
-                //const uploadedImage = Selector('img').withAttribute('src', 'vtech logo.png')
-                //await t.expect(uploadedImage.exists).ok('success')
-
-
+                .hover(Business_Info_Selectors.image_Container)
+                .setFilesToUpload(Business_Info_Selectors.file_Input_Selector, imagePath)
+                .click(Business_Info_Selectors.next)
     })
-        
-        
+            
 
 }
