@@ -66,19 +66,23 @@ export const Business_Info_Test_Cases = () => {
 
             
     test('2- Bassing the Business Information stage ', async t => {
-        const filePath = './files/sample.pdf';
+        const imagePath = 'C:\\Users\\USER\\Pictures\\vtech logo.png';
         await t
                 .click(Business_Info_Selectors.company_Name)
                 .typeText(Business_Info_Selectors.company_Name,"Vtech", { paste: true })
                 .click(Business_Info_Selectors.postal_Code)
                 .typeText(Business_Info_Selectors.postal_Code, "12ABC", { paste: true })
-                //.click(Business_Info_Selectors.company_Size)
-                //.hover(Business_Info_Selectors.company_Size_value).withText("1120")
-                //.click(Business_Info_Selectors.company_Size_value)
-                //.wait(1000)
-                //.click(Business_Info_Selectors.tax_Num)
-                //.typeText(Business_Info_Selectors.tax_Num,"6598652")
-                //.click
+                .click(Business_Info_Selectors.company_Size)
+                .wait(500)
+                .click(Business_Info_Selectors.company_Size_List.withText("11_20"))
+                .wait(1000)
+                .click(Business_Info_Selectors.tax_Num)
+                .typeText(Business_Info_Selectors.tax_Num,"6598652")
+                .click(Business_Info_Selectors.image_Container)
+                //.setFilesToUpload(Business_Info_Selectors.file_Input_Selector, imagePath);  // Upload the image
+                //const uploadedImage = Selector('img').withAttribute('src', 'vtech logo.png')
+                //await t.expect(uploadedImage.exists).ok('success')
+
 
     })
         

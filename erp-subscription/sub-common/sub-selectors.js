@@ -37,13 +37,14 @@ export const Business_Info_Selectors = {
     default_Language_Code: Selector('div').withText('العربية').nth(22),
     company_Phone : Selector('input[placeholder="User Phone"]'),
     company_Mobile: Selector('input[placeholder="User Phone"]'),
-    company_Size: Selector('.dx-lookup-field').nth(3),
-    company_Size_value: Selector(".dx-lookup-field"),
+    company_Size: Selector('.dx-lookup-field').nth(3),  // Click to open the dropdown
+    company_Size_List: Selector('.dx-list-item'), // Target dropdown list items
     tax_Num: Selector('input[placeholder="Tax Number"]'),//placeholder Tax Number
     currency: Selector('input.dx-texteditor-input[role="combobox"]').withAttribute('readonly'),
     commercial_Reg_Num: Selector('input[placeholder="Registration Number"]') ,
     mobile_Code: Selector('.dx-lookup-field'),
-    image: Selector('div').withText('NO IMAGE').nth(27) ,
+    image_Container: Selector('div').withText('NO IMAGE').nth(27) ,
+    file_Input_Selector : Selector('.landing-form').child('input[name="files[]"]'),
     next:Selector('div').withText('NEXT').nth(8),
     previous: Selector('div').withText('PREVIOUS').nth(8),
 }
