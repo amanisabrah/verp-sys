@@ -1,10 +1,9 @@
-import { Selector } from 'testcafe'
-import { Business_Info_Selectors, landing_Page_Selectors } from "../sub-common/sub-selectors.js"
+import { Business_Info_Selectors, landing_Page_Selectors, Business_Settings_Selectors, Business_Type_Selectors } from "../sub-common/sub-selectors.js"
 import { enter_Phone_And_Code  } from "../sub-common/sub-helpers.js"
 
+const imagePath = 'C:\\Users\\USER\\Pictures\\vtech logo.png';
 
 const login_And_Navigate_To_BusinessInfo = async t => {
-    
     const randomUsername = `Amani${Math.floor(1000 + Math.random() * 9000)}`; // Generate a username starting with "Amani"
     const randomEmail = `amani${Date.now()}@test.com`; // Generate a unique email
     const randomPhone = `789${Math.floor(1000000 + Math.random() * 1000000)}`; // Generate a random phone number
@@ -25,6 +24,26 @@ const login_And_Navigate_To_BusinessInfo = async t => {
     return { randomUsername, randomEmail, randomPhone }
 }
 
+// Reusable function for filling Business Information and Business Settings
+const fillBusinessInfoAndSettings = async t => {
+    await t
+        .click(Business_Info_Selectors.company_Name)
+        .typeText(Business_Info_Selectors.company_Name, "Vtech", { paste: true })
+        .click(Business_Info_Selectors.postal_Code)
+        .typeText(Business_Info_Selectors.postal_Code, "12ABC", { paste: true })
+        .click(Business_Info_Selectors.company_Size)
+        .wait(500)
+        .click(Business_Info_Selectors.company_Size_List.withText("11_20"))
+        .click(Business_Info_Selectors.tax_Num)
+        .typeText(Business_Info_Selectors.tax_Num, "6598652", { paste: true })
+        .hover(Business_Info_Selectors.image_Container)
+        .setFilesToUpload(Business_Info_Selectors.file_Input_Selector, imagePath)
+        .click(Business_Info_Selectors.next)
+        .expect(Business_Settings_Selectors.Business_Settings_Card.visible).ok('Business Settings card should be displayed')
+        .click(Business_Info_Selectors.next)
+        .expect(Business_Type_Selectors.Business_Type_Card.visible).ok('Business Type card should be displayed');
+}
+
 export const Business_Info_Test_Cases = () => {
     let testData
     fixture`Business Information stage test cases`
@@ -36,7 +55,7 @@ export const Business_Info_Test_Cases = () => {
         await t.setTestSpeed(0.8)
     })
 
-    /*test('1- Open the Business Information stage', async t => {
+    test('1- Open the Business Information stage', async t => {
         await t 
                 .hover(Business_Info_Selectors.city)
                 .expect(Business_Info_Selectors.city.value).contains('Amman', 'The city should be filled with the capital of the selected phone code')
@@ -53,35 +72,22 @@ export const Business_Info_Test_Cases = () => {
                 .click(Business_Info_Selectors.postal_Code)
                 .typeText(Business_Info_Selectors.postal_Code, '11593aaa', { replace: true })
                 .expect(Business_Info_Selectors.postal_Code.value).contains('a','The system allows typing characters in the postal code')
-                //.scroll(Business_Info_Selectors.currency, 'bottomLeft')
-                //.wait(1500)
-                //.hover(Business_Info_Selectors.currency)
-                //.expect(Business_Info_Selectors.currency.visible)
-                //await t 
-                //.expect(Business_Info_Selectors.currency.value).contains('JOD', 'The currency should be automatically filled based on the selected mobile code.')
                 .click(Business_Info_Selectors.next)
                 .expect(landing_Page_Selectors.error_List.visible).ok('Error List should be displayed for Compant name, Postal Code, Company Size, Tax Number, Registration Number')
                 .click(Business_Info_Selectors.previous)
                 .expect(landing_Page_Selectors.select_Lang_Card.visible).ok('Select Language card should displayed')            
-      })*/
+      })
           
-    test('2- Bassing the Business Information stage ', async t => {
-        const imagePath = 'C:\\Users\\USER\\Pictures\\vtech logo.png';
-        await t
-                .click(Business_Info_Selectors.company_Name)
-                .typeText(Business_Info_Selectors.company_Name,"Vtech", { paste: true })
-                .click(Business_Info_Selectors.postal_Code)
-                .typeText(Business_Info_Selectors.postal_Code, "12ABC", { paste: true })
-                .click(Business_Info_Selectors.company_Size)
-                .wait(500)
-                .click(Business_Info_Selectors.company_Size_List.withText("11_20"))
-                .wait(1000)
-                .click(Business_Info_Selectors.tax_Num)
-                .typeText(Business_Info_Selectors.tax_Num,"6598652")
-                .hover(Business_Info_Selectors.image_Container)
-                .setFilesToUpload(Business_Info_Selectors.file_Input_Selector, imagePath)
-                .click(Business_Info_Selectors.next)
+    test('2- Bassing the Business Information and Business Settings stages ', async t => {
+        await fillBusinessInfoAndSettings(t)
     })
+
+    test('3- Business Type ', async t => {
+        await fillBusinessInfoAndSettings(t)
+        await t.wait(5000)
+    })
+
+
             
 
 }

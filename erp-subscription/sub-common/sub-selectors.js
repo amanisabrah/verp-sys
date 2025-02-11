@@ -49,3 +49,12 @@ export const Business_Info_Selectors = {
     next:Selector('div').withText('NEXT').nth(8),
     previous: Selector('div').withText('PREVIOUS').nth(8),
 }
+
+export const Business_Settings_Selectors = {
+    Business_Settings_Card: Selector('.dx-card.content'),
+
+}
+
+export const  Business_Type_Selectors={
+    Business_Type_Card: Selector('.dx-card.content'),
+}
