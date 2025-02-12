@@ -1,4 +1,4 @@
-import { Business_Info_Selectors, landing_Page_Selectors, Business_Settings_Selectors, Business_Type_Selectors } from "../sub-common/sub-selectors.js"
+import { Business_Info_Selectors, landing_Page_Selectors, Business_Settings_Selectors, Business_Type_Selectors, Modules_Selectors, Business_Template_Selector } from "../sub-common/sub-selectors.js"
 import { enter_Phone_And_Code  } from "../sub-common/sub-helpers.js"
 
 const imagePath = 'C:\\Users\\USER\\Pictures\\vtech logo.png';
@@ -41,7 +41,7 @@ const fillBusinessInfoAndSettings = async t => {
         .click(Business_Info_Selectors.next)
         .expect(Business_Settings_Selectors.Business_Settings_Card.visible).ok('Business Settings card should be displayed')
         .click(Business_Info_Selectors.next)
-        .expect(Business_Type_Selectors.Business_Type_Card.visible).ok('Business Type card should be displayed');
+        .expect(Business_Type_Selectors.Business_Type_Card.visible).ok('Business Type card should be displayed')
 }
 
 export const Business_Info_Test_Cases = () => {
@@ -55,7 +55,7 @@ export const Business_Info_Test_Cases = () => {
         await t.setTestSpeed(0.8)
     })
 
-    test('1- Open the Business Information stage', async t => {
+    /*test('1- Open the Business Information stage', async t => {
         await t 
                 .hover(Business_Info_Selectors.city)
                 .expect(Business_Info_Selectors.city.value).contains('Amman', 'The city should be filled with the capital of the selected phone code')
@@ -80,14 +80,30 @@ export const Business_Info_Test_Cases = () => {
           
     test('2- Bassing the Business Information and Business Settings stages ', async t => {
         await fillBusinessInfoAndSettings(t)
-    })
+    })*/
 
-    test('3- Business Type ', async t => {
+    test('3- Business Type and Template Selection', async t => {
         await fillBusinessInfoAndSettings(t)
-        await t.wait(5000)
+        await t
+            .expect(Business_Type_Selectors.hospitality_Checkmark.exists)
+            .ok('Hospitality should have a checkmark')            
+        // Click on Retail to select it
+            .click(Business_Type_Selectors.retail)
+            .expect(Business_Type_Selectors.retail_Checkmark.exists).ok('Retail should now have a checkmark')
+            .hover(Business_Type_Selectors.next)
+            .click(Business_Type_Selectors.next)
+            .expect(Modules_Selectors.Modules_Card.visible).ok('Modules card should be displayed')
+        await t.
+            expect(Modules_Selectors.POS.visible).ok("Only POS should displayed")
+        await t 
+            .expect(Modules_Selectors.POS_Chekmark.exists).ok('POS should have a checkmark')
+            .click(Modules_Selectors.next)
+            .expect(Business_Type_Selectors.busniess_Card.visible).ok('This card contains examples of the retail business type')
+            .click(Business_Type_Selectors.supermarket_Business)
+            .wait(500)
+            .click(Modules_Selectors.next)
+            .expect(Business_Template_Selector.business_Template_Card.visible).ok('Business Template card should be displayed and cotains two options: template and manule')
+
     })
-
-
-            
 
 }

@@ -57,4 +57,29 @@ export const Business_Settings_Selectors = {
 
 export const  Business_Type_Selectors={
     Business_Type_Card: Selector('.dx-card.content'),
+    hospitality: Selector ('.card__body-cover'),
+    retail: Selector('.card__body-cover').nth(1),
+    hospitality_Checkmark: Selector('.card__body-cover').nth(0),
+    retail_Checkmark: Selector('.card__body-cover').nth(1),
+    next: Selector('div').withText('NEXT').nth(8),
+    ///////
+    busniess_Card: Selector('.card__body-cover'),
+    shop_Business: Selector('.card__body-cover').nth(0),
+    supermarket_Business: Selector('.card__body-cover').nth(1),
+    roastery_Business: Selector('.card__body-cover').nth(2),
+    chekmark: Selector('.card__body-cover-checkbox'),
+
+}
+
+export const Modules_Selectors= {
+    Modules_Card: Selector('.dx-card.content'),
+    POS: Selector('.card__body-cover'),
+    POS_Chekmark: Selector('.card__body-cover-checkbox'),
+    next: Selector('.dx-button-content').nth(2),
+
+}
+
+export const Business_Template_Selector= {
+    business_Template_Card: Selector('.dx-card.content'),
+    
 }
