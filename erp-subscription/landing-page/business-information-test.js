@@ -1,4 +1,6 @@
-import { Business_Info_Selectors, landing_Page_Selectors, Business_Settings_Selectors, Business_Type_Selectors, Modules_Selectors, Business_Template_Selector } from "../sub-common/sub-selectors.js"
+import { Business_Info_Selectors, landing_Page_Selectors, Business_Settings_Selectors, Business_Type_Selectors, 
+         Modules_Selectors, Business_Template_Selector, Pre_Defined_Templates_Selectors, POS_Menu_Selectors,
+         Locations_Selectors,   } from "../sub-common/sub-selectors.js"
 import { enter_Phone_And_Code  } from "../sub-common/sub-helpers.js"
 
 const imagePath = 'C:\\Users\\USER\\Pictures\\vtech logo.png';
@@ -103,6 +105,14 @@ export const Business_Info_Test_Cases = () => {
             .wait(500)
             .click(Modules_Selectors.next)
             .expect(Business_Template_Selector.business_Template_Card.visible).ok('Business Template card should be displayed and cotains two options: template and manule')
+            .click(Business_Template_Selector.template)
+            .click(Modules_Selectors.next)
+            .expect(Pre_Defined_Templates_Selectors.Pre_Defined_Templates_Card.visible).ok('Pre-Defined Templates card should be displayed')
+            .click(Pre_Defined_Templates_Selectors.hyper_Market)
+            .click(Modules_Selectors.next)
+            .expect(POS_Menu_Selectors.POS_Menu_Card.visible).ok('POS_Menu card should be displayed')
+            .click(Business_Type_Selectors.next)
+            .expect(Locations_Selectors.locations_Card.visible).ok('Locations card should be displayed')
 
     })
 

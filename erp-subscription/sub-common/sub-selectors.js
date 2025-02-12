@@ -81,5 +81,21 @@ export const Modules_Selectors= {
 
 export const Business_Template_Selector= {
     business_Template_Card: Selector('.dx-card.content'),
-    
+    template: Selector ('.card__body-cover').nth(0),
+
+}
+
+export const Pre_Defined_Templates_Selectors={
+    Pre_Defined_Templates_Card: Selector('.dx-card.content'),
+    hyper_Market: Selector('.card__body-cover').nth(0),
+    meat: Selector('.card__body-cover').nth(1),
+
+}
+
+export const POS_Menu_Selectors= {
+    POS_Menu_Card: Selector('.dx-card.content'),
+}
+
+export const Locations_Selectors = { 
+    locations_Card: Selector('.dx-card.content'),
 }
