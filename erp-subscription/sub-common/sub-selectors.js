@@ -98,4 +98,16 @@ export const POS_Menu_Selectors= {
 
 export const Locations_Selectors = { 
     locations_Card: Selector('.dx-card.content'),
+    add_Location: Selector ('.dx-button-content').nth(1),
+    location_Box_Input : Selector('.item-border-and-caption.dx-field-item'),
+    //pinmap_Button : locationItem.find('.dx-button.dx-button-has-icon').nth(0)
+    //next: Selector('.dx-button-content').nth(5)
+
+}
+
+export const What_InEach_Loc_Selectors = {
+    What_InEach_Location_Card: Selector('.dx-card.content') ,
+    pos_Button : Selector('div').withText('POS').nth(20), 
+    pos_Box_Input : Selector('.dx-texteditor-input'),
+
 }

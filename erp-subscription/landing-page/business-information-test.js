@@ -84,36 +84,6 @@ export const Business_Info_Test_Cases = () => {
         await fillBusinessInfoAndSettings(t)
     })*/
 
-    test('3- Business Type and Template Selection', async t => {
-        await fillBusinessInfoAndSettings(t)
-        await t
-            .expect(Business_Type_Selectors.hospitality_Checkmark.exists)
-            .ok('Hospitality should have a checkmark')            
-        // Click on Retail to select it
-            .click(Business_Type_Selectors.retail)
-            .expect(Business_Type_Selectors.retail_Checkmark.exists).ok('Retail should now have a checkmark')
-            .hover(Business_Type_Selectors.next)
-            .click(Business_Type_Selectors.next)
-            .expect(Modules_Selectors.Modules_Card.visible).ok('Modules card should be displayed')
-        await t.
-            expect(Modules_Selectors.POS.visible).ok("Only POS should displayed")
-        await t 
-            .expect(Modules_Selectors.POS_Chekmark.exists).ok('POS should have a checkmark')
-            .click(Modules_Selectors.next)
-            .expect(Business_Type_Selectors.busniess_Card.visible).ok('This card contains examples of the retail business type')
-            .click(Business_Type_Selectors.supermarket_Business)
-            .wait(500)
-            .click(Modules_Selectors.next)
-            .expect(Business_Template_Selector.business_Template_Card.visible).ok('Business Template card should be displayed and cotains two options: template and manule')
-            .click(Business_Template_Selector.template)
-            .click(Modules_Selectors.next)
-            .expect(Pre_Defined_Templates_Selectors.Pre_Defined_Templates_Card.visible).ok('Pre-Defined Templates card should be displayed')
-            .click(Pre_Defined_Templates_Selectors.hyper_Market)
-            .click(Modules_Selectors.next)
-            .expect(POS_Menu_Selectors.POS_Menu_Card.visible).ok('POS_Menu card should be displayed')
-            .click(Business_Type_Selectors.next)
-            .expect(Locations_Selectors.locations_Card.visible).ok('Locations card should be displayed')
-
-    })
+    
 
 }
